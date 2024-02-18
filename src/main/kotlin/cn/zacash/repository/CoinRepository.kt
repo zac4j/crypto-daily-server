@@ -7,7 +7,6 @@ import cn.zacash.Consts.TRENDING_NFTS
 import cn.zacash.models.Coin
 import cn.zacash.models.TrendingCoin
 import cn.zacash.models.TrendingNFT
-import kotlinx.coroutines.awaitAll
 import org.litote.kmongo.coroutine.CoroutineClient
 
 class CoinRepository(coroutineClient: CoroutineClient) {

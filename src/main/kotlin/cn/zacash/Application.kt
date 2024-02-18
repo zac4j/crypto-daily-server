@@ -7,12 +7,17 @@ import cn.zacash.plugins.configureRouting
 import cn.zacash.plugins.configureSerialization
 import cn.zacash.repository.CoinRepository
 import cn.zacash.service.CoinService
+import com.mongodb.ConnectionString
+import com.mongodb.MongoClientSettings
+import com.mongodb.MongoCredential
+import com.mongodb.ServerAddress
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import org.litote.kmongo.coroutine.CoroutineClient
+import java.util.Arrays.asList
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
@@ -20,7 +25,14 @@ fun main() {
 }
 
 val coroutineClient: CoroutineClient by inject(CoroutineClient::class.java) {
-    parametersOf("mongodb://mongodb:27017")
+    val mongoHost = System.getenv("MONGO_HOST") ?: "mongodb"
+    val mongoPort = (System.getenv("MONGO_PORT") ?: "27017").toInt()
+
+    val settings = MongoClientSettings.builder()
+        .applyConnectionString(ConnectionString("mongodb://$mongoHost:$mongoPort"))
+        .applyToClusterSettings { it.hosts(listOf(ServerAddress(mongoHost, mongoPort))) }
+        .build()
+    parametersOf(settings)
 }
 
 val repository: CoinRepository by inject(CoinRepository::class.java) {
