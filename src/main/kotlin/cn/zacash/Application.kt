@@ -19,7 +19,9 @@ fun main() {
         .start(wait = true)
 }
 
-val coroutineClient: CoroutineClient by inject(CoroutineClient::class.java)
+val coroutineClient: CoroutineClient by inject(CoroutineClient::class.java) {
+    parametersOf("mongodb://mongodb:27017")
+}
 
 val repository: CoinRepository by inject(CoinRepository::class.java) {
     parametersOf(coroutineClient)

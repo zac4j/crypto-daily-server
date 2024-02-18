@@ -13,5 +13,3 @@ docker-compose up
 ```bash
 ./gradlew run
 ```
-
-## Deployment

@@ -12,7 +12,7 @@ import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 
 val appModule = module {
-    single { (_: Unit) -> KMongo.createClient().coroutine }
+    single { (url: String) -> KMongo.createClient(url).coroutine }
     single { (client: CoroutineClient) -> CoinRepository(client) }
     single { (repository: CoinRepository) -> CoinService(repository) }
     single { (_: Unit) -> CoinController(repository) }

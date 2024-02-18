@@ -1,10 +1,35 @@
 version: '3'
 services:
+  web:
+    build: .
+    image: crypto-daily
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    networks:
+      - mongo_network
+    environment:
+      PORT: 8080
+      MONGODB_HOST: mongodb
+      MONGODB_URI: mongodb://mongodb:27017
+      DB_NAME: crypto_daily
+      NAME: CryptoDailyMain
+
   mongodb:
-    image: mongodb/mongodb-community-server:6.0.12-ubi8
+    image: mongo:latest
+    restart: always
     volumes:
       - mongodata:/data/db
     ports:
-      - 27017:27017
+      - "27017:27017"
+    networks:
+      - mongo_network
+
 volumes:
   mongodata:
+
+networks:
+  mongo_network:
+    driver: bridge
