@@ -1,7 +1,7 @@
 services:
   # A Ktor web service
   - type: web
-    name: ktor-server
+    name: crypto-daily
     runtime: docker
     repo: https://github.com/zac4j/crypto-daily.git
     branch: main
