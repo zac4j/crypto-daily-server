@@ -7,7 +7,6 @@ services:
     branch: main
     rootDir: src
     plan: starter
-    startCommand: ./render-start.sh
     envVars:
     - key: MONGO_HOST
       fromService:
