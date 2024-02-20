@@ -5,6 +5,7 @@ val kotlin_version: String by project
 val logback_version: String by project
 val mongodb_version: String by project
 val mockk_version: String by project
+val coroutines_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -41,10 +42,12 @@ dependencies {
     implementation("org.litote.kmongo:kmongo-coroutine:$mongodb_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
-    //Koin for dependency injection
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-core:$koin_version")
+
     testImplementation("io.ktor:ktor-server-tests")
+     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("io.mockk:mockk:$mockk_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version")
 }

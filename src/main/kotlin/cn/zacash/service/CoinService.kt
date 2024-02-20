@@ -22,8 +22,4 @@ class CoinService(private val repository: CoinRepository) {
 
     suspend fun deleteCoinById(id: String) = repository.deleteCoin(id)
 
-    fun release() {
-
-    }
-
 }
