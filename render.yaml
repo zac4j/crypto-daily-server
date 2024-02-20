@@ -5,7 +5,6 @@ services:
     runtime: docker
     repo: https://github.com/zac4j/crypto-daily.git
     branch: main
-    rootDir: src
     plan: starter
     envVars:
     - key: MONGO_HOST
